@@ -10,7 +10,7 @@ function Nav (props) {
         currentCategory,
     } = props;
 
-    useEffect = (() => {
+    useEffect(() => {
         document.title = capitalizeFirstLetter(currentCategory.name)
     }, [currentCategory])
     // The second argument directs the hook to re-render the component on changes to the value of this state. In other words, if currentCategory changes now, the component will re-render so that the change in document.title will be visible to the user.

@@ -1,16 +1,29 @@
 import React, { useState } from 'react';
 
+import {validateEmail} from '../../utils/helpers'
+
 function ContactForm () {
 
     const [formState, setFormState] = useState({ name: '', email: '', message: '' })
     const { name, email, message } = formState
+    const [errorMessage, setErrorMessage] = useState('')
 
     function handleChange(e) {
-        setFormState({...formState, [e.target.name]: e.target.value })
-        // [] is used for dynamic property names 
+
+        if (e.target.name === 'email') {
+            const isValid = validateEmail(e.target.value)
+            !isValid ? setErrorMessage('ERROR: Invalid email address') : setErrorMessage('')
+        } else {
+            !e.target.value.length ? setErrorMessage(`ERROR: ${e.target.name} is required.`) : setErrorMessage("")
+        }
+        if (!errorMessage) {
+            setFormState({...formState, [e.target.name]: e.target.value })
+            // [] is used for dynamic property names 
+        }
     }
 
     function handleSubmit(e) {
+        
         e.preventDefault()
         console.log(formState)
     }

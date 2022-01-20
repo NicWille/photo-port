@@ -23,7 +23,7 @@ function ContactForm () {
     }
 
     function handleSubmit(e) {
-        
+
         e.preventDefault()
         console.log(formState)
     }
@@ -34,16 +34,21 @@ function ContactForm () {
             <form id="contactForm" onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="name">Name:</label>
-                    <input type="text" name="name" defaultValue={name} onChange={handleChange} />
+                    <input type="text" name="name" defaultValue={name} onBlur={handleChange} />
                 </div>
                 <div>
                     <label htmlFor="email">Email address:</label>
-                    <input type="email" name="email" defaultValue={email} onChange={handleChange} />
+                    <input type="email" name="email" defaultValue={email} onBlur={handleChange} />
                 </div>
                 <div>
                     <label htmlFor="message">Message:</label>
-                    <textarea name="message" defaultValue={message} onChange={handleChange} rows="5"  />
+                    <textarea name="message" defaultValue={message} onBlur={handleChange} rows="5"  />
                 </div>
+                {errorMessage && (
+                    <div>
+                        <p className="error-text">{errorMessage}</p>
+                    </div>
+                )}
                 <button type="submit">Submit</button>
             </form>
         </section>
